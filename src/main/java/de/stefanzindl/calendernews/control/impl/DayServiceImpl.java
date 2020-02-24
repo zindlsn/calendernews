@@ -17,7 +17,7 @@ public class DayServiceImpl implements DayService {
 
     @Override
     public Day save(Day toSave) {
-        return toSave;//dayRepository.saveAndFlush(toSave);
+        return dayRepository.saveAndFlush(toSave);
     }
 
     @Override
@@ -28,5 +28,10 @@ public class DayServiceImpl implements DayService {
     @Override
     public List<Day> loadByIdentifier(UUID identifier) {
         return null;
+    }
+
+    @Override
+    public List<Day> findAll() {
+        return dayRepository.findAll();
     }
 }

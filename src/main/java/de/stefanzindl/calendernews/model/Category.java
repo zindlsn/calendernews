@@ -12,4 +12,20 @@ public class Category extends AbstractPersistable<Long> implements Serializable 
     @Column(unique = true, nullable = false)
     private UUID categoryIdentifier = UUID.randomUUID();
     private String name;
+
+    public UUID getCategoryIdentifier() {
+        return categoryIdentifier;
+    }
+
+    public void setCategoryIdentifier(UUID categoryIdentifier) {
+        this.categoryIdentifier = categoryIdentifier;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
