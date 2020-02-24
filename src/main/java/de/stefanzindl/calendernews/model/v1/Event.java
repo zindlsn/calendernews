@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,17 +15,26 @@ public class Event extends AbstractPersistable<Long> {
 
     @Column(unique = true,nullable = false)
     private UUID eventIdentifier;
+
     @NotNull
+    @Column
     private String name;
+
+    @Column
     private String description;
 
     @NotNull
-    @OneToOne
+    @OneToMany(fetch = FetchType.EAGER)
     private Category category;
 
-    @OneToOne
+    @OneToMany(fetch = FetchType.EAGER)
     private Country country;
 
+    @NotNull
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Topic> topics;
+
+    @NotNull
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Day dayOfEvent;
 
@@ -74,5 +84,13 @@ public class Event extends AbstractPersistable<Long> {
 
     public void setDayOfEvent(Day dayOfEvent) {
         this.dayOfEvent = dayOfEvent;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }

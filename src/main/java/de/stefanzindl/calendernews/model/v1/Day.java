@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Day extends AbstractPersistable<Long> implements Serializable {
 
     @Column(unique = true, nullable = false,updatable = false)
-    private UUID dayIdentifier = UUID.randomUUID();
+    private UUID dayIdentifier;
 
     @Column
     private String title;
