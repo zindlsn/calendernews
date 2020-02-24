@@ -1,9 +1,7 @@
 package de.stefanzindl.calendernews.rest.v1;
 
 import de.stefanzindl.calendernews.boundary.CategoryManagementService;
-import de.stefanzindl.calendernews.boundary.DaysManagementService;
-import de.stefanzindl.calendernews.model.Category;
-import de.stefanzindl.calendernews.model.Day;
+import de.stefanzindl.calendernews.model.v1.Category;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -11,6 +9,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * REST controller for categories.
+ */
 @RestController
 @RequestMapping(path = CategoryControllerV1.CONTROLLER_PATH)
 public class CategoryControllerV1 {

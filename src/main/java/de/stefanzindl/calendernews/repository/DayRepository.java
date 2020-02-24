@@ -1,7 +1,6 @@
 package de.stefanzindl.calendernews.repository;
 
-import de.stefanzindl.calendernews.model.Category;
-import de.stefanzindl.calendernews.model.Day;
+import de.stefanzindl.calendernews.model.v1.Day;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package de.stefanzindl.calendernews.control.impl;
 
 import de.stefanzindl.calendernews.control.DayService;
-import de.stefanzindl.calendernews.model.Day;
+import de.stefanzindl.calendernews.model.v1.Day;
 import de.stefanzindl.calendernews.repository.DayRepository;
 
 import java.util.List;

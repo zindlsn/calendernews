@@ -1,12 +1,8 @@
 package de.stefanzindl.calendernews.boundary.impl;
 
 import de.stefanzindl.calendernews.boundary.CategoryManagementService;
-import de.stefanzindl.calendernews.boundary.DaysManagementService;
 import de.stefanzindl.calendernews.control.CategoryService;
-import de.stefanzindl.calendernews.control.DayService;
-import de.stefanzindl.calendernews.model.Category;
-import de.stefanzindl.calendernews.model.Day;
-import de.stefanzindl.calendernews.repository.CategoryRepository;
+import de.stefanzindl.calendernews.model.v1.Category;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +18,9 @@ public class CategoryManagementServiceImpl implements CategoryManagementService 
 
     @Override
     public UUID saveCategory(Category category) {
+        if(category.isNew()){
+            category.setCategoryIdentifier(UUID.randomUUID());
+        }
         Category persistedCategory =  categoryService.save(category);
         return persistedCategory.getCategoryIdentifier();
     }

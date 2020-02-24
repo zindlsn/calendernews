@@ -1,9 +1,8 @@
 package de.stefanzindl.calendernews.control.impl;
 
 import de.stefanzindl.calendernews.control.CategoryService;
-import de.stefanzindl.calendernews.model.Category;
+import de.stefanzindl.calendernews.model.v1.Category;
 import de.stefanzindl.calendernews.repository.CategoryRepository;
-import de.stefanzindl.calendernews.repository.DayRepository;
 
 import java.util.List;
 import java.util.UUID;

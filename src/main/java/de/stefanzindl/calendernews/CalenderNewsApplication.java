@@ -7,6 +7,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+/**
+ * Entry point of this REST-Application
+ */
 @SpringBootApplication
 @ComponentScan(basePackages = "de.stefanzindl.calendernews")
 @EnableJpaRepositories(basePackages = {"de.stefanzindl.calendernews.repository"})
