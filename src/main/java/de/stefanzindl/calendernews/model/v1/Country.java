@@ -1,15 +1,12 @@
 package de.stefanzindl.calendernews.model.v1;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
 /**
- * It is used to specify the {@link Event} in which country its happening.
+ * It is used to specify the {@link ActionDay} in which country its happening.
  * Like national event.
  */
 @Entity
@@ -22,6 +19,9 @@ public class Country {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "country",fetch = FetchType.LAZY)
-    List<Event> events;
+    @ManyToMany(fetch = FetchType.LAZY)
+    List<ActionDay> actionDays;
+
+    @Column
+    CountryCode countryCode;
 }

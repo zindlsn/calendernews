@@ -8,27 +8,27 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Each {@link Event} is categorisied in different subject like
+ * Each {@link ActionDay} is categorisied in different subject like
  * food days, fancy day, etc...
  */
 @Entity
 public class Topic extends AbstractPersistable<Long> implements Serializable {
 
     @Column(unique = true, nullable = false)
-    private UUID subjectIdentifier;
+    private UUID topicIdentifier;
 
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "topics", fetch = FetchType.LAZY)
-    List<Event> events;
+    @ManyToMany(fetch = FetchType.LAZY)
+    List<ActionDay> actionDays;
 
-    public UUID getSubjectIdentifier() {
-        return subjectIdentifier;
+    public UUID getTopicIdentifier() {
+        return topicIdentifier;
     }
 
-    public void setSubjectIdentifier(UUID subjectIdentifier) {
-        this.subjectIdentifier = subjectIdentifier;
+    public void setTopicIdentifier(UUID subjectIdentifier) {
+        this.topicIdentifier = subjectIdentifier;
     }
 
     public String getName() {
@@ -39,11 +39,11 @@ public class Topic extends AbstractPersistable<Long> implements Serializable {
         this.name = name;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public List<ActionDay> getActionDays() {
+        return actionDays;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
+    public void setActionDays(List<ActionDay> actionDays) {
+        this.actionDays = actionDays;
     }
 }

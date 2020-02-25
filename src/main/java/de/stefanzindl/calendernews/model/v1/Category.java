@@ -9,7 +9,7 @@ package de.stefanzindl.calendernews.model.v1;
  import java.util.UUID;
 
 /**
- * It represents the category of an {@link Event} like
+ * It represents the category of an {@link ActionDay} like
  * name day, national holiday, etc...
  */
 @Entity
@@ -21,9 +21,6 @@ public class Category extends AbstractPersistable<Long> implements Serializable 
     @NotNull
     @Column
     private String name;
-
-    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
-    private List<Event> events;
 
     public UUID getCategoryIdentifier() {
         return categoryIdentifier;
@@ -39,13 +36,5 @@ public class Category extends AbstractPersistable<Long> implements Serializable 
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 }

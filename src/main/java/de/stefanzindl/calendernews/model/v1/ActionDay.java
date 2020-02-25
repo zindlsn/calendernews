@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,10 +12,13 @@ import java.util.UUID;
  * It represents all information about the event which is happening.
  */
 @Entity
-public class Event extends AbstractPersistable<Long> {
+public class ActionDay extends AbstractPersistable<Long> {
 
     @Column(unique = true,nullable = false)
-    private UUID eventIdentifier;
+    private UUID actionDayIdentifier;
+
+    @Column
+    private LocalDate date;
 
     @NotNull
     @Column
@@ -23,27 +27,19 @@ public class Event extends AbstractPersistable<Long> {
     @Column
     private String description;
 
-    @NotNull
-    @OneToMany(fetch = FetchType.EAGER)
-    private Category category;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private Country country;
+    @ManyToMany(mappedBy = "actionDays",fetch = FetchType.EAGER)
+    private List<Country> country;
 
     @NotNull
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "events",fetch = FetchType.EAGER)
     private List<Topic> topics;
 
-    @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Day dayOfEvent;
-
-    public UUID getEventIdentifier() {
-        return eventIdentifier;
+    public UUID getActionDayIdentifier() {
+        return actionDayIdentifier;
     }
 
-    public void setEventIdentifier(UUID eventIdentifier) {
-        this.eventIdentifier = eventIdentifier;
+    public void setActionDayIdentifier(UUID actionDayIdentifier) {
+        this.actionDayIdentifier = actionDayIdentifier;
     }
 
     public String getName() {
@@ -62,28 +58,12 @@ public class Event extends AbstractPersistable<Long> {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Country getCountry() {
+    public List<Country> getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(List<Country> country) {
         this.country = country;
-    }
-
-    public Day getDayOfEvent() {
-        return dayOfEvent;
-    }
-
-    public void setDayOfEvent(Day dayOfEvent) {
-        this.dayOfEvent = dayOfEvent;
     }
 
     public List<Topic> getTopics() {
@@ -92,5 +72,13 @@ public class Event extends AbstractPersistable<Long> {
 
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
