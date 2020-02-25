@@ -31,7 +31,7 @@ public class ActionDay extends AbstractPersistable<Long> {
     private List<Country> country;
 
     @NotNull
-    @ManyToMany(mappedBy = "events",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "actionDays",fetch = FetchType.EAGER)
     private List<Topic> topics;
 
     public UUID getActionDayIdentifier() {
