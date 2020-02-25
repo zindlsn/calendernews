@@ -1,7 +1,6 @@
 package de.stefanzindl.calendernews.boundary.impl;
 
 import de.stefanzindl.calendernews.boundary.ActionDayManagementService;
-import de.stefanzindl.calendernews.control.CategoryService;
 import de.stefanzindl.calendernews.control.ActionDayService;
 import de.stefanzindl.calendernews.model.v1.ActionDay;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +12,9 @@ import java.util.UUID;
 public class ActionDayManagementServiceImpl implements ActionDayManagementService {
 
     final ActionDayService actionDayService;
-    final CategoryService categoryService;
 
-    public ActionDayManagementServiceImpl(ActionDayService actionDayService, CategoryService categoryService){
+    public ActionDayManagementServiceImpl(ActionDayService actionDayService){
         this.actionDayService = actionDayService;
-        this.categoryService =categoryService;
     }
 
     @Override

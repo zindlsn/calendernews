@@ -1,10 +1,7 @@
 package de.stefanzindl.calendernews.boundary.impl;
 
-import de.stefanzindl.calendernews.boundary.CategoryManagementService;
 import de.stefanzindl.calendernews.boundary.TopicManagementService;
-import de.stefanzindl.calendernews.control.CategoryService;
 import de.stefanzindl.calendernews.control.TopicService;
-import de.stefanzindl.calendernews.model.v1.Category;
 import de.stefanzindl.calendernews.model.v1.Topic;
 
 import java.util.List;

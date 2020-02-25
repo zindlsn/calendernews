@@ -1,6 +1,5 @@
 package de.stefanzindl.calendernews.boundary;
 
-import de.stefanzindl.calendernews.model.v1.Category;
 import de.stefanzindl.calendernews.model.v1.Topic;
 
 import java.util.List;
