@@ -23,8 +23,7 @@ public class Country extends AbstractPersistable<Country> implements Serializabl
     @Column
     private String internationalName;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    List<ActionDay> actionDays;
+//    List<ActionDay> actionDays;
 
     @Column
     Locale countryCode;
@@ -43,14 +42,6 @@ public class Country extends AbstractPersistable<Country> implements Serializabl
 
     public void setInternationalName(String internationalName) {
         this.internationalName = internationalName;
-    }
-
-    public List<ActionDay> getActionDays() {
-        return actionDays;
-    }
-
-    public void setActionDays(List<ActionDay> actionDays) {
-        this.actionDays = actionDays;
     }
 
     public Locale getCountryCode() {

@@ -12,6 +12,5 @@ import java.util.UUID;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
-    Country findByIdentifier(UUID identifier);
-    List<Country> findByCountryCode(Locale locale);
+    Country findByCountryIdentifier(UUID countryIdentifier);
 }

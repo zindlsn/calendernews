@@ -8,8 +8,5 @@ import java.util.UUID;
 public interface TopicManagementService {
 
     UUID saveTopic(Topic topic);
-
     List<Topic> findAll();
-
-    List<Topic> findEventsByCountryCode(String countryCode);
 }

@@ -27,7 +27,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country loadByIdentifier(UUID identifier) {
-        return countryRepository.findByIdentifier(identifier);
+        return countryRepository.findByCountryIdentifier(identifier);
     }
 
     @Override

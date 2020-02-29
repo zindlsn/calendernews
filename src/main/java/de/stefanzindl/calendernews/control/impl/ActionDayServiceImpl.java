@@ -29,7 +29,7 @@ public class ActionDayServiceImpl implements ActionDayService {
     }
 
     @Override
-    public List<ActionDay> loadByIdentifier(UUID identifier) {
+    public ActionDay loadByIdentifier(UUID identifier) {
         return null;
     }
 
@@ -44,8 +44,7 @@ public class ActionDayServiceImpl implements ActionDayService {
     }
 
     @Override
-    public List<ActionDay> loadByTopicNames(List<String> names) {
-        List<UUID> topicIdentifiers = topicRepository.findAllByNames(names);
-        return actionDayRepository.findAllByTopicIdentifiers(topicIdentifiers);
+    public ActionDay findOneByUuid(UUID actionDayIdentifier) {
+        return actionDayRepository.findByActionDayIdentifier(actionDayIdentifier);
     }
 }

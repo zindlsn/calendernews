@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface ActionDayRepository extends JpaRepository<ActionDay,Long> {
     List<ActionDay> findByDate(LocalDate date);
-    List<ActionDay> findAllByTopicIdentifiers(List<UUID> topicIdentifiers);
+    ActionDay findByActionDayIdentifier(UUID actionDayIdentifier);
 }

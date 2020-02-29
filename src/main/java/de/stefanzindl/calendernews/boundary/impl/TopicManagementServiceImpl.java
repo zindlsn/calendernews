@@ -11,7 +11,6 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 
     final TopicService topicService;
 
-
     public TopicManagementServiceImpl(TopicService topicService) {
         this.topicService = topicService;
     }
@@ -28,10 +27,5 @@ public class TopicManagementServiceImpl implements TopicManagementService {
     @Override
     public List<Topic> findAll() {
         return topicService.findAll();
-    }
-
-    @Override
-    public List<Topic> findEventsByCountryCode(String countryCode) {
-        return null;
     }
 }

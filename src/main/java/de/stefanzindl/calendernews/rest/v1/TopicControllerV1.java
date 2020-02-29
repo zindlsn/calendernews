@@ -43,9 +43,4 @@ public class TopicControllerV1 {
     public List<Topic> getTopics() {
         return delegate.findAll();
     }
-
-    @GetMapping(path = "/{countryCode}")
-    public List<Topic> getTopics(@PathVariable String countryCode) {
-        return delegate.findEventsByCountryCode(countryCode);
-    }
 }

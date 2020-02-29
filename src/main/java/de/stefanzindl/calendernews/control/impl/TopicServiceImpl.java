@@ -26,7 +26,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> loadByIdentifier(UUID identifier) {
+    public Topic loadByIdentifier(UUID identifier) {
         return null;
     }
 

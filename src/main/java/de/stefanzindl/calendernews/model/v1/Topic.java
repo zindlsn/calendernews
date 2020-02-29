@@ -20,8 +20,7 @@ public class Topic extends AbstractPersistable<Long> implements Serializable {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    List<ActionDay> actionDays;
+//    List<ActionDay> actionDays;
 
     public UUID getTopicIdentifier() {
         return topicIdentifier;
@@ -37,13 +36,5 @@ public class Topic extends AbstractPersistable<Long> implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<ActionDay> getActionDays() {
-        return actionDays;
-    }
-
-    public void setActionDays(List<ActionDay> actionDays) {
-        this.actionDays = actionDays;
     }
 }

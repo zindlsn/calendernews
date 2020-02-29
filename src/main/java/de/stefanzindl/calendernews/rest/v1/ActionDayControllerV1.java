@@ -1,6 +1,7 @@
 package de.stefanzindl.calendernews.rest.v1;
 
 import de.stefanzindl.calendernews.boundary.ActionDayManagementService;
+import de.stefanzindl.calendernews.dto.ActionDayDto;
 import de.stefanzindl.calendernews.model.v1.ActionDay;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,9 +9,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 /**
- * REST controller for events.
+ * REST controller for action-days.
  */
 @RestController
 @RequestMapping(path = ActionDayControllerV1.CONTROLLER_PATH)
@@ -27,23 +29,34 @@ public class ActionDayControllerV1 {
     }
 
     /**
-     * Save or update a day.
-     * @param actionDay
+     * Save or update a action-day.
+     * @param actionDayDto
      * @return
      */
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-    public ResponseEntity<String> createActionDay(@RequestBody ActionDay actionDay) {
+    public ResponseEntity<String> createActionDay(@RequestBody ActionDayDto actionDayDto) {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(delegate.saveActionDay(actionDay))
+                .buildAndExpand(delegate.saveActionDay(actionDayDto))
                 .toUri();
 
         return ResponseEntity.created(uri).build();
     }
 
     /**
-     * Get all provided events.
+     * Gets a {@link ActionDayDto} by actonDayIdentifier.
+     *
+     * @param id to set
+     * @return action-day
+     */
+    @GetMapping("/{id}")
+    public ActionDayDto getActionDay(@PathVariable String id) {
+        return delegate.findActionDayByActionDayIdentifier(UUID.fromString(id));
+    }
+
+    /**
+     * Get all provided actionDays.
      * @return
      */
     @GetMapping(path = "/")
