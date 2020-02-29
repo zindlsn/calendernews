@@ -1,8 +1,12 @@
 package de.stefanzindl.calendernews.model.v1;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -10,18 +14,50 @@ import java.util.UUID;
  * Like national event.
  */
 @Entity
-public class Country {
+public class Country extends AbstractPersistable<Country> implements Serializable {
 
     @Column(unique = true, nullable = false)
     private UUID countryIdentifier;
 
     @NotNull
     @Column
-    private String name;
+    private String internationalName;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     List<ActionDay> actionDays;
 
     @Column
-    CountryCode countryCode;
+    Locale countryCode;
+
+    public UUID getCountryIdentifier() {
+        return countryIdentifier;
+    }
+
+    public void setCountryIdentifier(UUID countryIdentifier) {
+        this.countryIdentifier = countryIdentifier;
+    }
+
+    public String getInternationalName() {
+        return internationalName;
+    }
+
+    public void setInternationalName(String internationalName) {
+        this.internationalName = internationalName;
+    }
+
+    public List<ActionDay> getActionDays() {
+        return actionDays;
+    }
+
+    public void setActionDays(List<ActionDay> actionDays) {
+        this.actionDays = actionDays;
+    }
+
+    public Locale getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(Locale countryCode) {
+        this.countryCode = countryCode;
+    }
 }

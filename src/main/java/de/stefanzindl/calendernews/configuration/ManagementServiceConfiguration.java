@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Configuration;
 public class ManagementServiceConfiguration {
 
     @Bean
-    public ActionDayManagementService eventManagementService(ActionDayService actionDayService){
-        return new ActionDayManagementServiceImpl(actionDayService);
+    public ActionDayManagementService actionDayManagementService(ActionDayService actionDayService, TopicService topicService) {
+        return new ActionDayManagementServiceImpl(actionDayService, topicService);
     }
 
     @Bean
-    public TopicManagementService topicManagementService(TopicService topicService){
+    public TopicManagementService topicManagementService(TopicService topicService) {
         return new TopicManagementServiceImpl(topicService);
     }
 }

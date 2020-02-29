@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -27,8 +28,8 @@ public class ActionDay extends AbstractPersistable<Long> {
     @Column
     private String description;
 
-    @ManyToMany(mappedBy = "actionDays",fetch = FetchType.EAGER)
-    private List<Country> country;
+    @ManyToOne
+    private Set<Country> countries;
 
     @NotNull
     @ManyToMany(mappedBy = "actionDays",fetch = FetchType.EAGER)
@@ -58,14 +59,6 @@ public class ActionDay extends AbstractPersistable<Long> {
         this.description = description;
     }
 
-    public List<Country> getCountry() {
-        return country;
-    }
-
-    public void setCountry(List<Country> country) {
-        this.country = country;
-    }
-
     public List<Topic> getTopics() {
         return topics;
     }
@@ -80,5 +73,13 @@ public class ActionDay extends AbstractPersistable<Long> {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Set<Country> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(Set<Country> countries) {
+        this.countries = countries;
     }
 }
