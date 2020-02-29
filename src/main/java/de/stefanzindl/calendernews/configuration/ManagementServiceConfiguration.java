@@ -1,8 +1,8 @@
 package de.stefanzindl.calendernews.configuration;
 
-import de.stefanzindl.calendernews.boundary.CalenderNewsManagementService;
-import de.stefanzindl.calendernews.boundary.impl.CalenderNewsManagementServiceImpl;
-import de.stefanzindl.calendernews.control.DayService;
+import de.stefanzindl.calendernews.boundary.ActionDayManagementService;
+import de.stefanzindl.calendernews.boundary.impl.ActionDayManagementServiceImpl;
+import de.stefanzindl.calendernews.control.ActionDayService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class ManagementServiceConfiguration {
 
     @Bean
-    public CalenderNewsManagementService calenderNewsManagementService(DayService  dayService)
-    {
-        return new CalenderNewsManagementServiceImpl(dayService);
+    public ActionDayManagementService actionDayManagementService(ActionDayService actionDayService) {
+        return new ActionDayManagementServiceImpl(actionDayService);
     }
 }

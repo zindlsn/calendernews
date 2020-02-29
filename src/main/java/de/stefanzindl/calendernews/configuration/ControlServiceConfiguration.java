@@ -1,8 +1,8 @@
 package de.stefanzindl.calendernews.configuration;
 
-import de.stefanzindl.calendernews.control.DayService;
-import de.stefanzindl.calendernews.control.impl.DayServiceImpl;
-import de.stefanzindl.calendernews.repository.DayRepository;
+import de.stefanzindl.calendernews.control.ActionDayService;
+import de.stefanzindl.calendernews.control.impl.ActionDayServiceImpl;
+import de.stefanzindl.calendernews.repository.ActionDayRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class ControlServiceConfiguration {
 
     @Bean
-    public DayService connectionService(DayRepository dayRepository) {
-        return new DayServiceImpl(dayRepository);
+    public ActionDayService actionDayService(ActionDayRepository actionDayRepository) {
+        return new ActionDayServiceImpl(actionDayRepository);
     }
 }
