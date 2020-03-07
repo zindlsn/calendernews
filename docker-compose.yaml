@@ -1,14 +1,12 @@
 version: "3.6"
 services:
   calender-news:
-    image: flexopti-dev.iao.fraunhofer.de/flexopti-backend:latest
+    image: zindlsn/calendernews:latest
     restart: always
     environment:
-      - SPRING_PROFILES_ACTIVE=dev,db-postgresql
       - SPRING_DATASOURCE_PASSWORD=......
       - SPRING_DATASOURCE_URL=jdbc:postgresql://calendernews:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
-      -
     ports:
       - 9090:9090
     networks:

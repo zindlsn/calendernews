@@ -1,4 +1,4 @@
+FROM openjdk:latest
+ADD target/calendernews-0.0.1-SNAPSHOT_jar.jar calendernews-0.0.1-SNAPSHOT_jar.jar
 EXPOSE 9090
-
-COPY target/calendernews-0.0.1-SNAPSHOT.jar calendernews-0.0.1-SNAPSHOT.jar
-CMD ["java", "-jar", "flexopti-backend-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "cn.jar"]
