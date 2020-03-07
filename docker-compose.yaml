@@ -1,0 +1,61 @@
+version: "3.6"
+services:
+  calender-news:
+    image: flexopti-dev.iao.fraunhofer.de/flexopti-backend:latest
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev,db-postgresql
+      - SPRING_DATASOURCE_PASSWORD=......
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://calendernews:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      -
+    ports:
+      - 9090:9090
+    networks:
+      - default
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.protocol=http"
+      - "traefik.port=9090"
+      - "traefik.docker.network=web"
+
+  calendernews-postgresql:
+    image: postgres:9.5.13-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=calendernews
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=......
+    ports:
+      - 9432:5432
+    networks:
+      - default
+      - web
+
+  pgadmin:
+    image: dpage/pgadmin4:3.1
+    restart: always
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=stefan.zindl@outlook.de
+      - PGADMIN_DEFAULT_PASSWORD=......
+    networks:
+      - default
+      - web
+    ports:
+      - 9180:80
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.protocol=http"
+      - "traefik.port=9180"
+      - "traefik.calendernews=pgadmin"
+      - "traefik.docker.network=web"
+
+    ports:
+      - 9888:8888
+
+networks:
+  default:
+    external: false
+  web:
+    external: true
