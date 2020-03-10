@@ -51,7 +51,7 @@ public class ActionDayControllerV1 {
      * @return action-day
      */
     @GetMapping("/{id}")
-    public ActionDayDto getActionDay(@PathVariable String id) {
+    public ActionDayDto get(@PathVariable String id) {
         return delegate.findActionDayByActionDayIdentifier(UUID.fromString(id));
     }
 
@@ -60,7 +60,7 @@ public class ActionDayControllerV1 {
      * @return found action-days
      */
     @GetMapping(path = "/")
-    public List<ActionDay> getActionDays() {
+    public List<ActionDay> getAll() {
         return delegate.findAll();
     }
 
@@ -69,7 +69,7 @@ public class ActionDayControllerV1 {
      * @return found action-days
      */
     @GetMapping(path = "/today")
-    public List<ActionDay> getToday(){
+    public List<ActionDay> getAllFromToday(){
         return delegate.getToday();
     }
 
@@ -78,7 +78,7 @@ public class ActionDayControllerV1 {
      * @return found action-days
      */
     @GetMapping(path = "/tomorrow")
-    public List<ActionDay> getTomorrow(){
+    public List<ActionDay> getAllFromTomorrow(){
         return delegate.getTomorrow();
     }
 
