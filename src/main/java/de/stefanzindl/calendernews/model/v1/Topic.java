@@ -15,13 +15,13 @@ import java.util.UUID;
 public class Topic extends AbstractPersistable<Long> implements Serializable {
 
     /**
-     * UniqueIdentifier for this topic
+     * UniqueIdentifier for this topic.
      */
     @Column(unique = true, nullable = false)
     private UUID topicIdentifier;
 
     /**
-     * Name of the topic
+     * Name of the topic.
      */
     @Column
     private String name;
