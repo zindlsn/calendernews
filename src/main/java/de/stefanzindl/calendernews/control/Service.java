@@ -13,8 +13,8 @@ public interface Service<T> {
     /**
      * Saves T in the database.
      *
-     * @param toSave T
-     * @return T
+     * @param toSave T toSave
+     * @return T savedObject
      */
     T save(T toSave);
 
@@ -22,14 +22,14 @@ public interface Service<T> {
      * Find T by its identifier.
      *
      * @param identifier of T
-     * @return T
+     * @return T found T
      */
     T findOneByUuid(UUID identifier);
 
     /**
      * Finds all of T.
      *
-     * @return List<T>
+     * @return a list of T
      */
     List<T> findAll();
 }

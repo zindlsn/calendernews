@@ -1,0 +1,13 @@
+language: java
+jdk:
+- openjdk13
+before_install:
+- chmod +x mvnw
+jobs:
+  include:
+  - stage: test
+  - name: "Check JavaDocs"
+    script:
+    - mvn compile javadoc:javadoc
+    on:
+      branch: develop
