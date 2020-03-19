@@ -17,6 +17,7 @@ public class ControlServiceConfiguration {
 
     /**
      * Service for action-days.
+     *
      * @param actionDayRepository repository
      * @return Implementation
      */
@@ -27,11 +28,12 @@ public class ControlServiceConfiguration {
 
     /**
      * Service for topics.
+     *
      * @param topicRepository topicRepository
      * @return implementation
      */
     @Bean
-    public TopicService topicService(TopicRepository topicRepository){
+    public TopicService topicService(TopicRepository topicRepository) {
         return new TopicServiceImpl(topicRepository);
     }
 }

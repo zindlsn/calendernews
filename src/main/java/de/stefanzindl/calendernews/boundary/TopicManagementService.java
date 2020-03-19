@@ -1,5 +1,6 @@
 package de.stefanzindl.calendernews.boundary;
 
+import de.stefanzindl.calendernews.dto.v1.TopicDto;
 import de.stefanzindl.calendernews.model.v1.Topic;
 
 import java.util.List;
@@ -15,13 +16,19 @@ public interface TopicManagementService {
      * @param topic toSave
      * @return its uniqueIdentifier
      */
-    UUID saveTopic(Topic topic);
+    UUID saveTopic(TopicDto topic);
 
     /**
      * find all saved topics.
-     * @return list of topics.
+     * @return list of topics
      */
-    List<Topic> findAll();
+    List<TopicDto> findAll();
 
-    Topic findTopicByTopicIdentifier(UUID uuid);
+    /**
+     * Finds a Topic by its identifier.
+     *
+     * @param uuid identifier
+     * @return dto
+     */
+    TopicDto findTopicByTopicIdentifier(UUID uuid);
 }

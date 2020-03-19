@@ -2,6 +2,8 @@ package de.stefanzindl.calendernews.configuration;
 
 import de.stefanzindl.calendernews.boundary.ActionDayManagementService;
 import de.stefanzindl.calendernews.boundary.TopicManagementService;
+import de.stefanzindl.calendernews.boundary.converter.ActionDayConverter;
+import de.stefanzindl.calendernews.boundary.converter.TopicConverter;
 import de.stefanzindl.calendernews.boundary.impl.ActionDayManagementServiceImpl;
 import de.stefanzindl.calendernews.boundary.impl.TopicManagementServiceImpl;
 import de.stefanzindl.calendernews.control.ActionDayService;
@@ -18,22 +20,25 @@ public class ManagementServiceConfiguration {
     /**
      * ManagementService for action-days.
      *
-     * @param actionDayService service
+     * @param actionDayService action day service
+     * @param topicService     topic service
+     * @param topicConverter   topic converter
      * @return implementation
      */
     @Bean
-    public ActionDayManagementService actionDayManagementService(ActionDayService actionDayService) {
-        return new ActionDayManagementServiceImpl(actionDayService);
+    public ActionDayManagementService actionDayManagementService(ActionDayService actionDayService, TopicService topicService, TopicConverter topicConverter, ActionDayConverter actionDayConverter) {
+        return new ActionDayManagementServiceImpl(actionDayService, topicService, actionDayConverter);
     }
 
     /**
      * ManagementService for topics.
      *
-     * @param topicService service
+     * @param topicConverter converter for topic
+     * @param topicService   service
      * @return implementation
      */
     @Bean
-    public TopicManagementService topicManagementService(TopicService topicService) {
-        return new TopicManagementServiceImpl(topicService);
+    public TopicManagementService topicManagementService(TopicConverter topicConverter, TopicService topicService) {
+        return new TopicManagementServiceImpl(topicConverter, topicService);
     }
 }

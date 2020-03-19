@@ -2,6 +2,7 @@ package de.stefanzindl.calendernews.dto.v1;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -16,6 +17,8 @@ public class ActionDayDto implements Serializable {
     private String name;
 
     private String description;
+
+    private List<TopicDto> relatedTopics;
 
     public UUID getActionDayIdentifier() {
         return actionDayIdentifier;
@@ -47,5 +50,13 @@ public class ActionDayDto implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<TopicDto> getRelatedTopics() {
+        return relatedTopics;
+    }
+
+    public void setRelatedTopics(List<TopicDto> relatedTopics) {
+        this.relatedTopics = relatedTopics;
     }
 }

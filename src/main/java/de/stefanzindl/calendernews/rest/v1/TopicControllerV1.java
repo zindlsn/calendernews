@@ -1,6 +1,7 @@
 package de.stefanzindl.calendernews.rest.v1;
 
 import de.stefanzindl.calendernews.boundary.TopicManagementService;
+import de.stefanzindl.calendernews.dto.v1.TopicDto;
 import de.stefanzindl.calendernews.model.v1.Topic;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,16 +29,16 @@ public class TopicControllerV1 {
     /**
      * Creates a new topic.
      *
-     * @param topic to set
+     * @param topicDto to set
      * @return url of new topic
      */
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-    public ResponseEntity<String> createTopic(@RequestBody Topic topic) {
+    public ResponseEntity<String> createTopic(@RequestBody TopicDto topicDto) {
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(delegate.saveTopic(topic))
+                .buildAndExpand(delegate.saveTopic(topicDto))
                 .toUri();
 
         return ResponseEntity.created(uri).build();
@@ -49,7 +50,7 @@ public class TopicControllerV1 {
      * @return list of topics
      */
     @GetMapping(path = "/")
-    public List<Topic> getAll() {
+    public List<TopicDto> getAll() {
         return delegate.findAll();
     }
 
@@ -60,7 +61,7 @@ public class TopicControllerV1 {
      * @return topic
      */
     @GetMapping("/{id}")
-    public Topic get(@PathVariable String id) {
+    public TopicDto get(@PathVariable String id) {
         return delegate.findTopicByTopicIdentifier(UUID.fromString(id));
     }
 }

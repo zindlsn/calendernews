@@ -2,9 +2,13 @@ package de.stefanzindl.calendernews.model.v1;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,7 +17,7 @@ import java.util.UUID;
 @Entity
 public class ActionDay extends AbstractPersistable<Long> {
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private UUID actionDayIdentifier;
 
     /**
@@ -35,6 +39,9 @@ public class ActionDay extends AbstractPersistable<Long> {
      */
     @Column
     private String description;
+
+    @OneToMany(mappedBy = "relatedDay", fetch = FetchType.EAGER)
+    private List<Topic> relatedTopics;
 
     public UUID getActionDayIdentifier() {
         return actionDayIdentifier;
@@ -66,5 +73,13 @@ public class ActionDay extends AbstractPersistable<Long> {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public List<Topic> getRelatedTopics() {
+        return relatedTopics;
+    }
+
+    public void setRelatedTopics(List<Topic> relatedTopics) {
+        this.relatedTopics = relatedTopics;
     }
 }

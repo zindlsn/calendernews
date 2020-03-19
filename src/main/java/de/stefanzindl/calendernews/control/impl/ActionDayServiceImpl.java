@@ -10,9 +10,9 @@ import java.util.UUID;
 
 public class ActionDayServiceImpl implements ActionDayService {
 
-    ActionDayRepository actionDayRepository;
+    private final ActionDayRepository actionDayRepository;
 
-    public ActionDayServiceImpl(ActionDayRepository actionDayRepository){
+    public ActionDayServiceImpl(ActionDayRepository actionDayRepository) {
         this.actionDayRepository = actionDayRepository;
     }
 
@@ -24,6 +24,11 @@ public class ActionDayServiceImpl implements ActionDayService {
     @Override
     public List<ActionDay> findAll() {
         return actionDayRepository.findAll();
+    }
+
+    @Override
+    public List<ActionDay> saveAll(List<ActionDay> toSave) {
+        return actionDayRepository.saveAll(toSave);
     }
 
     @Override

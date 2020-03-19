@@ -1,9 +1,12 @@
 package de.stefanzindl.calendernews.boundary.impl;
 
 import de.stefanzindl.calendernews.boundary.ActionDayManagementService;
+import de.stefanzindl.calendernews.boundary.converter.ActionDayConverter;
 import de.stefanzindl.calendernews.control.ActionDayService;
+import de.stefanzindl.calendernews.control.TopicService;
 import de.stefanzindl.calendernews.dto.v1.ActionDayDto;
 import de.stefanzindl.calendernews.model.v1.ActionDay;
+import de.stefanzindl.calendernews.model.v1.Topic;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -16,54 +19,57 @@ import java.util.UUID;
  */
 public class ActionDayManagementServiceImpl implements ActionDayManagementService {
 
-    final ActionDayService actionDayService;
+    private final ActionDayService actionDayService;
+    private final TopicService topicService;
+    private final ActionDayConverter actionDayConverter;
 
-    public ActionDayManagementServiceImpl(ActionDayService actionDayService) {
+    public ActionDayManagementServiceImpl(ActionDayService actionDayService, TopicService topicService, ActionDayConverter actionDayConverter) {
         this.actionDayService = actionDayService;
+        this.topicService = topicService;
+        this.actionDayConverter = actionDayConverter;
     }
 
     @Override
+    @Transactional
     public UUID saveActionDay(ActionDayDto actionDayDto) {
-        if(Objects.isNull(actionDayDto)){
+        if (Objects.isNull(actionDayDto)) {
             throw new IllegalArgumentException("Can not create an actionDay from a null dto.");
         }
-        ActionDay actionDay = actionDayService.findOneByUuid(actionDayDto.getActionDayIdentifier());
-        if(Objects.isNull(actionDay)|| actionDay.isNew()){
-            actionDay = new ActionDay();
-            actionDay.setActionDayIdentifier(actionDayDto.getActionDayIdentifier());
-            actionDay.setName(actionDayDto.getName());
-            actionDay.setDescription(actionDayDto.getDescription());
-            actionDay.setDate(actionDayDto.getDate());
-            ActionDay persistedActionDay = actionDayService.save(actionDay);
-            return persistedActionDay.getActionDayIdentifier();
-        }
-        return actionDay.getActionDayIdentifier();
+
+        final ActionDay persistedActionDay = actionDayService.save(actionDayConverter.convertFromDto(actionDayDto));
+        final List<Topic> topics = persistedActionDay.getRelatedTopics();
+        topics.forEach(topic -> topic.setRelatedDay(persistedActionDay));
+        topicService.saveAll(persistedActionDay.getRelatedTopics());
+
+        return persistedActionDay.getActionDayIdentifier();
     }
 
     @Override
-    public List<ActionDay> findAll() {
-        return actionDayService.findAll();
+    @Transactional
+    public List<ActionDayDto> findAll() {
+        return actionDayConverter.convertToDtos(actionDayService.findAll());
     }
 
     @Override
-    public List<ActionDay> getToday() {
-        return actionDayService.loadByDate(LocalDate.now());
+    @Transactional
+    public List<ActionDayDto> getToday() {
+        return actionDayConverter.convertToDtos(actionDayService.loadByDate(LocalDate.now()));
     }
 
     @Override
-    public List<ActionDay> getTomorrow() {
-        return actionDayService.loadByDate(LocalDate.now().plusDays(1));
+    @Transactional
+    public List<ActionDayDto> getTomorrow() {
+        return actionDayConverter.convertToDtos(actionDayService.loadByDate(LocalDate.now().plusDays(1)));
     }
 
     @Override
     @Transactional
     public ActionDayDto findActionDayByActionDayIdentifier(UUID fromString) {
-        ActionDay actionDay =  actionDayService.findOneByUuid(fromString);
-        ActionDayDto actionDayDto = new ActionDayDto();
-        actionDayDto.setActionDayIdentifier(actionDay.getActionDayIdentifier());
-        actionDayDto.setName(actionDay.getName());
-        actionDayDto.setDate(actionDay.getDate());
-        actionDayDto.setDescription(actionDay.getDescription());
-        return actionDayDto;
+        ActionDay actionDay = actionDayService.findOneByUuid(fromString);
+        if (Objects.nonNull(actionDay)) {
+            return actionDayConverter.convertToDto(actionDay);
+        } else {
+            throw new IllegalArgumentException("Actionday not found");
+        }
     }
 }

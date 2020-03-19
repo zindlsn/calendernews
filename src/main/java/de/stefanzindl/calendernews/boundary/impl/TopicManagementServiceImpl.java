@@ -1,7 +1,9 @@
 package de.stefanzindl.calendernews.boundary.impl;
 
 import de.stefanzindl.calendernews.boundary.TopicManagementService;
+import de.stefanzindl.calendernews.boundary.converter.TopicConverter;
 import de.stefanzindl.calendernews.control.TopicService;
+import de.stefanzindl.calendernews.dto.v1.TopicDto;
 import de.stefanzindl.calendernews.model.v1.Topic;
 
 import java.util.List;
@@ -14,18 +16,20 @@ import java.util.UUID;
 public class TopicManagementServiceImpl implements TopicManagementService {
 
     private final TopicService topicService;
+    private final TopicConverter topicConverter;
 
-    public TopicManagementServiceImpl(TopicService topicService) {
+    public TopicManagementServiceImpl(TopicConverter topicConverter, TopicService topicService) {
+        this.topicConverter = topicConverter;
         this.topicService = topicService;
     }
 
     @Override
-    public UUID saveTopic(Topic topic) {
-        if(Objects.isNull(topic)){
+    public UUID saveTopic(TopicDto topic) {
+        if (Objects.isNull(topic)) {
             throw new IllegalArgumentException("Can not create a topic from a null object.");
         }
         Topic foundTopic = topicService.findOneByUuid(topic.getTopicIdentifier());
-        if(Objects.isNull(foundTopic) || foundTopic.isNew()){
+        if (Objects.isNull(foundTopic) || foundTopic.isNew()) {
             foundTopic = new Topic();
         }
         foundTopic.setTopicIdentifier(topic.getTopicIdentifier());
@@ -35,12 +39,12 @@ public class TopicManagementServiceImpl implements TopicManagementService {
     }
 
     @Override
-    public List<Topic> findAll() {
-        return topicService.findAll();
+    public List<TopicDto> findAll() {
+        return topicConverter.convertToDtos(topicService.findAll());
     }
 
     @Override
-    public Topic findTopicByTopicIdentifier(UUID uuid) {
-        return topicService.findOneByUuid(uuid);
+    public TopicDto findTopicByTopicIdentifier(UUID identifier) {
+        return topicConverter.convertToDto(topicService.findOneByUuid(identifier));
     }
 }

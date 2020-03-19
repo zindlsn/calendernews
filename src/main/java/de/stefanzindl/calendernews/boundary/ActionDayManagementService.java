@@ -1,7 +1,6 @@
 package de.stefanzindl.calendernews.boundary;
 
 import de.stefanzindl.calendernews.dto.v1.ActionDayDto;
-import de.stefanzindl.calendernews.model.v1.ActionDay;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,11 +12,11 @@ public interface ActionDayManagementService {
 
     UUID saveActionDay(ActionDayDto actionDay);
 
-    List<ActionDay> findAll();
+    List<ActionDayDto> findAll();
 
-    List<ActionDay> getToday();
+    List<ActionDayDto> getToday();
 
-    List<ActionDay> getTomorrow();
+    List<ActionDayDto> getTomorrow();
 
     ActionDayDto findActionDayByActionDayIdentifier(UUID fromString);
 }

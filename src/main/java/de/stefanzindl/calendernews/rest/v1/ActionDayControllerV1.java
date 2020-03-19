@@ -2,7 +2,6 @@ package de.stefanzindl.calendernews.rest.v1;
 
 import de.stefanzindl.calendernews.boundary.ActionDayManagementService;
 import de.stefanzindl.calendernews.dto.v1.ActionDayDto;
-import de.stefanzindl.calendernews.model.v1.ActionDay;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,8 +18,7 @@ import java.util.UUID;
 public class ActionDayControllerV1 {
 
 
-    public static final String CONTROLLER_PATH = "/v1/actiondays";
-
+    static final String CONTROLLER_PATH = "/v1/actiondays";
 
     private final ActionDayManagementService delegate;
 
@@ -60,7 +58,7 @@ public class ActionDayControllerV1 {
      * @return found action-days
      */
     @GetMapping(path = "/")
-    public List<ActionDay> getAll() {
+    public List<ActionDayDto> getAll() {
         return delegate.findAll();
     }
 
@@ -69,7 +67,7 @@ public class ActionDayControllerV1 {
      * @return found action-days
      */
     @GetMapping(path = "/today")
-    public List<ActionDay> getAllFromToday(){
+    public List<ActionDayDto> getAllFromToday() {
         return delegate.getToday();
     }
 
@@ -78,7 +76,7 @@ public class ActionDayControllerV1 {
      * @return found action-days
      */
     @GetMapping(path = "/tomorrow")
-    public List<ActionDay> getAllFromTomorrow(){
+    public List<ActionDayDto> getAllFromTomorrow() {
         return delegate.getTomorrow();
     }
 

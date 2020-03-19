@@ -2,9 +2,11 @@ package de.stefanzindl.calendernews.model.v1;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,6 +28,9 @@ public class Topic extends AbstractPersistable<Long> implements Serializable {
     @Column
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ActionDay relatedDay;
+
     public UUID getTopicIdentifier() {
         return topicIdentifier;
     }
@@ -40,5 +45,13 @@ public class Topic extends AbstractPersistable<Long> implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ActionDay getRelatedDay() {
+        return relatedDay;
+    }
+
+    public void setRelatedDay(ActionDay relatedDay) {
+        this.relatedDay = relatedDay;
     }
 }
