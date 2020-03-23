@@ -6,6 +6,10 @@ This project is a REST-Endpoint to get information about
 - ...
 
 ## CHANGELOG
+### 0.2 Release
+- Endpoint for topics
+- Topics can be added to ActionDays
+
 ### 0.1 Release
 - Adding Action-Days Controller:
 - GetAll ActionDays GET /v1/actiondays/
