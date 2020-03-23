@@ -14,11 +14,25 @@ import org.springframework.context.annotation.Configuration;
 public class ConverterConfiguration {
 
 
+    /**
+     * Singelton for Action-day converter.
+     *
+     * @param actionDayService to set
+     * @param topicService     to set
+     * @param topicConverter   to set
+     * @return the converter
+     */
     @Bean
     ActionDayConverter actionDayConverter(ActionDayService actionDayService, TopicService topicService, TopicConverter topicConverter) {
         return new ActionDayConverter(actionDayService, topicService, topicConverter);
     }
 
+    /**
+     * Singelton for topic converter.
+     *
+     * @param topicService to set
+     * @return the converter
+     */
     @Bean
     TopicConverter topicConverter(TopicService topicService) {
         return new TopicConverter(topicService);

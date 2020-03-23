@@ -12,10 +12,11 @@ import java.util.UUID;
  * Repository for {@link ActionDay}.
  */
 @Repository
-public interface ActionDayRepository extends JpaRepository<ActionDay,Long> {
+public interface ActionDayRepository extends JpaRepository<ActionDay, Long> {
 
     /**
      * Find all Action-days from a specific date.
+     *
      * @param date of action-day
      * @return found action-days
      */
@@ -23,6 +24,7 @@ public interface ActionDayRepository extends JpaRepository<ActionDay,Long> {
 
     /**
      * Find the action-day by its identifier.
+     *
      * @param actionDayIdentifier of action-day
      * @return found action-day
      */

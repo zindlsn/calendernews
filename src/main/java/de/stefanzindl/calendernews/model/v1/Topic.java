@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -14,7 +13,7 @@ import java.util.UUID;
  * food days, fancy day, etc...
  */
 @Entity
-public class Topic extends AbstractPersistable<Long> implements Serializable {
+public class Topic extends AbstractPersistable<Long> {
 
     /**
      * UniqueIdentifier for this topic.

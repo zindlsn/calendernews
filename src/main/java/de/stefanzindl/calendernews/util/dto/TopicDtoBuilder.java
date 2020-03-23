@@ -12,16 +12,20 @@ public class TopicDtoBuilder {
     private UUID topicIdentifier;
     private String name;
 
-    public TopicDtoBuilder() {
+    private TopicDtoBuilder() {
         topicIdentifier = UUID.fromString("d8396034-273f-44da-9551-1ce95977cdcb");
         name = "Umwelt";
+    }
+
+    public static TopicDtoBuilder instance() {
+        return new TopicDtoBuilder();
     }
 
     public UUID getTopicIdentifier() {
         return topicIdentifier;
     }
 
-    public TopicDtoBuilder withActionDayIdentifier(UUID actionDayIdentifier) {
+    public TopicDtoBuilder withTopicIdentifier(UUID actionDayIdentifier) {
         this.topicIdentifier = actionDayIdentifier;
         return this;
     }

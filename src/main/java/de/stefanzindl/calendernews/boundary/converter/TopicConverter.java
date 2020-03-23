@@ -3,6 +3,7 @@ package de.stefanzindl.calendernews.boundary.converter;
 import de.stefanzindl.calendernews.control.TopicService;
 import de.stefanzindl.calendernews.dto.v1.TopicDto;
 import de.stefanzindl.calendernews.model.v1.Topic;
+import de.stefanzindl.calendernews.util.dto.TopicDtoBuilder;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,10 +28,10 @@ public class TopicConverter {
      * @return dto
      */
     public TopicDto convertToDto(Topic topic) {
-        TopicDto topicDto = new TopicDto();
-        topicDto.setTopicIdentifier(topic.getTopicIdentifier());
-        topicDto.setName(topic.getName());
-        return topicDto;
+        return TopicDtoBuilder.instance()
+                .withTopicIdentifier(topic.getTopicIdentifier())
+                .withName(topic.getName())
+                .build();
     }
 
     /**
@@ -39,13 +40,13 @@ public class TopicConverter {
      * @param topicDto to covert to
      * @return entity
      */
-    Topic convertFromDto(TopicDto topicDto) {
+    private Topic convertFromDto(TopicDto topicDto) {
         Topic topic = topicService.findOneByUuid(topicDto.getTopicIdentifier());
         if (Objects.isNull(topic) || topic.isNew()) {
             topic = new Topic();
-            topic.setTopicIdentifier(topic.getTopicIdentifier());
+            topic.setTopicIdentifier(topicDto.getTopicIdentifier());
         }
-        topic.setName(topic.getName());
+        topic.setName(topicDto.getName());
         return topic;
     }
 

@@ -16,13 +16,18 @@ public class ActionDayDtoBuilder {
     private UUID actionDayIdentifier;
     private String name;
     private LocalDate date;
+    private String description;
     private List<TopicDto> topics;
 
-    public ActionDayDtoBuilder() {
-        this.actionDayIdentifier = UUID.fromString("3685cb0c-2f80-4a6c-83cd-0936b08db13f");
+    private ActionDayDtoBuilder() {
+        this.actionDayIdentifier = UUID.fromString("3e8162a5-c555-4d8b-a6a3-87c7a2ed75ae");
         date = LocalDate.of(2020, 3, 22);
         name = "Wassertag";
         this.topics = new ArrayList<>();
+    }
+
+    public static ActionDayDtoBuilder instance() {
+        return new ActionDayDtoBuilder();
     }
 
     public UUID getActionDayIdentifier() {
@@ -61,6 +66,15 @@ public class ActionDayDtoBuilder {
         return this;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public ActionDayDtoBuilder withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     /**
      * Builds to dto.
      *
@@ -71,6 +85,7 @@ public class ActionDayDtoBuilder {
         actionDayDto.setActionDayIdentifier(this.actionDayIdentifier);
         actionDayDto.setName(this.name);
         actionDayDto.setDate(this.date);
+        actionDayDto.setDescription(this.description);
         actionDayDto.setRelatedTopics(topics);
         return actionDayDto;
     }

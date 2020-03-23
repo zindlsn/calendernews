@@ -7,6 +7,7 @@ import de.stefanzindl.calendernews.control.TopicService;
 import de.stefanzindl.calendernews.dto.v1.ActionDayDto;
 import de.stefanzindl.calendernews.model.v1.ActionDay;
 import de.stefanzindl.calendernews.model.v1.Topic;
+import de.stefanzindl.calendernews.rest.v1.ActionDayControllerV1;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Managementservice for {@link de.stefanzindl.calendernews.rest.v1.ActionDayControllerV1}.
+ * Managementservice for {@link ActionDayControllerV1}.
  */
 public class ActionDayManagementServiceImpl implements ActionDayManagementService {
 
@@ -39,7 +40,7 @@ public class ActionDayManagementServiceImpl implements ActionDayManagementServic
         final ActionDay persistedActionDay = actionDayService.save(actionDayConverter.convertFromDto(actionDayDto));
         final List<Topic> topics = persistedActionDay.getRelatedTopics();
         topics.forEach(topic -> topic.setRelatedDay(persistedActionDay));
-        topicService.saveAll(persistedActionDay.getRelatedTopics());
+        topicService.saveAll(topics);
 
         return persistedActionDay.getActionDayIdentifier();
     }

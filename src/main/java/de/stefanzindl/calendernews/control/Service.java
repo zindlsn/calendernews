@@ -1,7 +1,5 @@
 package de.stefanzindl.calendernews.control;
 
-import de.stefanzindl.calendernews.model.v1.Topic;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +35,7 @@ public interface Service<T> {
 
     /**
      * Save all T in database.
+     *
      * @param toSave List of T
      * @return saved List of T
      */

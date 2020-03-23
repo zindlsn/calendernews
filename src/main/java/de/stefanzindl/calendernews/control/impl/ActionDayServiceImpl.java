@@ -18,7 +18,10 @@ public class ActionDayServiceImpl implements ActionDayService {
 
     @Override
     public ActionDay save(ActionDay toSave) {
-        return actionDayRepository.save(toSave);
+        if (toSave.isNew()) {
+            toSave.setActionDayIdentifier(UUID.randomUUID());
+        }
+        return actionDayRepository.saveAndFlush(toSave);
     }
 
     @Override

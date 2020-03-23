@@ -4,6 +4,7 @@ import de.stefanzindl.calendernews.control.ActionDayService;
 import de.stefanzindl.calendernews.control.TopicService;
 import de.stefanzindl.calendernews.dto.v1.ActionDayDto;
 import de.stefanzindl.calendernews.model.v1.ActionDay;
+import de.stefanzindl.calendernews.util.dto.ActionDayDtoBuilder;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,13 +42,13 @@ public class ActionDayConverter {
      * @return dto
      */
     public ActionDayDto convertToDto(ActionDay actionDay) {
-        ActionDayDto actionDayDto = new ActionDayDto();
-        actionDayDto.setActionDayIdentifier(actionDay.getActionDayIdentifier());
-        actionDayDto.setName(actionDay.getName());
-        actionDay.setDate(actionDay.getDate());
-        actionDay.setDescription(actionDay.getDescription());
-        actionDayDto.setRelatedTopics(topicConverter.convertToDtos(actionDay.getRelatedTopics()));
-        return actionDayDto;
+        return ActionDayDtoBuilder.instance()
+                .withActionDayIdentifier(actionDay.getActionDayIdentifier())
+                .withTopicDtos(topicConverter.convertToDtos(actionDay.getRelatedTopics()))
+                .withDate(actionDay.getDate())
+                .withDescription(actionDay.getDescription())
+                .withName(actionDay.getName())
+                .build();
     }
 
     /**
@@ -62,7 +63,6 @@ public class ActionDayConverter {
             actionDay = new ActionDay();
             actionDay.setActionDayIdentifier(actionDayDto.getActionDayIdentifier());
         }
-
         actionDay.setName(actionDayDto.getName());
         actionDay.setDate(actionDayDto.getDate());
         actionDay.setDescription(actionDayDto.getDescription());
